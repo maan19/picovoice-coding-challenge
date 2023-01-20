@@ -1,0 +1,30 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body{
+    font-family: sans-serif;
+    min-height: 100%;
+    color: black;
+    background-color: white;
+    padding: 30px;
+}
+
+.ratings-wrapper{
+    display: inline-block;
+    margin-bottom: 20 px;
+    padding: 0 10px;
+}
+
+.ratings {
+    display: flex;
+    flex-direction: row-reverse;
+}
+
+.ratings span{
+    cursor: pointer;
+    transition: all 0.2s;
+    font-size: 40px;
+}
