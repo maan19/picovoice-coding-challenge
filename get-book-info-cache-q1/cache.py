@@ -1,6 +1,9 @@
 """
-Design a LRU cache with capacity N and it stores most recently used N Book objects by isbn as key"""
-
+LRU cache with capacity N and it stores most recently used N Book objects by isbn as key
+To keep track of most recently used books, we use LRU cache with doubly linked list
+Each time a new book is added to the cache, we add it to the right/beginning of the list, as MRU item
+Similarly, when a book is accessed, we add it to the right/beginning of the list, as MRU item
+Adding elements to full cache will remove the least recently accessed item"""
 class Node:
     def __init__(self, key, value):
         self.key = key
@@ -18,7 +21,7 @@ class LRUCache:
         self.right.prev = self.left
         #implement locks
     
-    #insert into right in list
+    #insert into right in linked list
     def insert_right_list(self, node):
         prev = self.right.prev
         node.prev = prev
@@ -26,7 +29,7 @@ class LRUCache:
         self.right.prev = node
         node.next = self.right
     
-    #delete least recently used from left in list
+    #delete least recently used from left in linked list
     def delete_node_list(self, node):
        prev = node.prev
        next = node.next
@@ -34,6 +37,8 @@ class LRUCache:
        prev.next = next
        next.prev = prev
 
+    #get element by key
+    #get operation will move to the right/beginning of the list as most recently accessed item
     def get(self, key):
         if key in self.cache:
             #update the MRU list
@@ -45,6 +50,10 @@ class LRUCache:
         else:
             return None
     
+    #put element into cache
+    #if the cache is full, remove the least recently accessed item
+    #if key already exists, update the value
+    #put operation will make the elememt to the right/beginning of the list as most recently accessed item
     def put(self, key, value):
         if key in self.cache:
             #update the MRU list
